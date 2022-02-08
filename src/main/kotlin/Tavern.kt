@@ -21,7 +21,7 @@ fun visitTavern() {
     narrate(menuItems.joinToString())
 
     val patrons: MutableSet<String> = mutableSetOf()
-    repeat(10) {
+    while (patrons.size < 10) {
         patrons += "${firstNames.random()} ${lastNames.random()}"
     }
     narrate("$heroName sees several patrons in the tavern:")
