@@ -9,20 +9,17 @@ private val lastNames = setOf("Ironfoot", "Fernswerth", "Baggins", "Downstrider"
 private val menuData = File("data/tavern-menu-data.txt")
     .readText()
     .split("\n")
+    .map { it.split(",")}
 
-private val menuItems = List(menuData.size) { index ->
-val (_, name, _) = menuData[index].split(",")
-    name
-}
-private val menuItemPrices: Map<String, Double> = List(menuData.size) { index ->
-    val (_, name, price) = menuData[index].split(",")
+private val menuItems = menuData.map { (_, name, _) -> name }
+
+private val menuItemPrices = menuData.associate { (_, name, price) ->
     name to price.toDouble()
-}.toMap()
+}
 
-private val menuItemTypes: Map<String, String> = List(menuData.size) { index ->
-    val  (type, name, _) = menuData[index].split(",")
+private val menuItemTypes = menuData.associate { (type, name, _) ->
     name to type
-}.toMap()
+}
 
 
 fun visitTavern() {
