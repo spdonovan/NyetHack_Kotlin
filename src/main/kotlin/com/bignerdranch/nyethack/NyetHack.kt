@@ -1,11 +1,11 @@
-
-var player = Player()
+package com.bignerdranch.nyethack
+var player = Player("Jason", "Jacksonville", 100, false)
 
 fun main() {
-narrate("${player.name} is ${player.title}")
-    player.changeName("Aurelia")
     //changeNarratorMood()
-narrate("${player.name}, ${player.title}, heads to the town square")
+    val mortality = if (player.isImmortal) "an immortal" else "a mortal"
+    narrate("${player.name} of ${player.homeTown} ${player.title}, heads to the town square")
+    narrate("${player.name}, $mortality, has ${player.healthPoints} health points")
     visitTavern()
     player.castFireBall()
 }
