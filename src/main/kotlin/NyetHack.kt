@@ -1,4 +1,5 @@
 var heroName: String = ""
+var player = Player()
 
 fun main() {
    heroName = promptHeroName()
@@ -6,6 +7,7 @@ fun main() {
     //changeNarratorMood()
     narrate("$heroName, ${createTitle(heroName)} heads to the town square.")
     visitTavern()
+    player.castFireBall()
 }
 
 private fun promptHeroName(): String {
