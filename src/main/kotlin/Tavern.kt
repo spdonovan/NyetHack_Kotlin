@@ -26,7 +26,7 @@ private val menuItemTypes = menuData.associate { (type, name, _) ->
 
 fun visitTavern() {
 
-    narrate("$heroName enters $TAVERN_NAME")
+    narrate("${player.name} enters $TAVERN_NAME")
     narrate("There are several items for sale:")
     narrate(menuItems.joinToString())
 
@@ -34,10 +34,10 @@ fun visitTavern() {
         .zip(lastNames.shuffled()) { firstName, lastName -> "$firstName $lastName" }
         .toMutableSet()
     val patronGold = mutableMapOf(
-        TAVERN_MASTER to 86.00, heroName to 4.50,
+        TAVERN_MASTER to 86.00, player.name to 4.50,
     *patrons.map { it to 6.00 }.toTypedArray())
 
-    narrate("$heroName sees several patrons in the tavern:")
+    narrate("${player.name} sees several patrons in the tavern:")
     narrate(patrons.joinToString())
 
     val itemOfTheDay = patrons.flatMap { getFavouriteMenuItems(it) }.random()
@@ -56,7 +56,7 @@ fun visitTavern() {
             patronGold -= departingPatrons }
 
         .forEach { patron ->
-        narrate("$heroName sees $patron departing the tavern")
+        narrate("${player.name} sees $patron departing the tavern")
     }
     narrate("There are still some patrons in the tavern")
     narrate(patrons.joinToString())
@@ -93,7 +93,7 @@ private fun placeOrder(patronName: String,
 }
 
 private fun displayPatronBalances(patronGold: Map<String, Double>) {
-    narrate("$heroName intuitively knows how much money each patron has")
+    narrate("${player.name} intuitively knows how much money each patron has")
     patronGold.forEach { (patron, balance) ->
         narrate("$patron has ${"%.2f".format(balance)} gold")
     }
