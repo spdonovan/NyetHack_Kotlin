@@ -1,14 +1,11 @@
 package com.bignerdranch.nyethack
 
-class Player(initialName: String, homeTown: String, healthPoints: Int, isImmortal: Boolean)
+class Player(initialName: String, val homeTown: String, var healthPoints: Int, val isImmortal: Boolean)
 {
     var name = initialName
     get() = field.replaceFirstChar { it.uppercase() }
     private set(value) { field = value.trim() }
 
-    val homeTown = homeTown
-    val healthPoints = healthPoints
-    val isImmortal = isImmortal
 
     val title: String
     get() = when {
@@ -18,6 +15,21 @@ class Player(initialName: String, homeTown: String, healthPoints: Int, isImmorta
             else -> "The Renowned Hero"
         }
 
+    init {
+        require(healthPoints > 0) { "healthpoints must be greater than zero" }
+        require(name.isNotBlank()) { "Player must have a name" }
+    }
+
+    constructor(name: String) : this(
+        initialName = name,
+        homeTown = "Neversummer",
+        healthPoints = 100,
+        isImmortal = false
+    ) {
+        if (name.equals("Jason", ignoreCase = true)) {
+            healthPoints = 500
+        }
+    }
 
     fun castFireBall(numFireBalls: Int = 2) {
         narrate("A glass of Fireball springs into existence (x$numFireBalls)")
