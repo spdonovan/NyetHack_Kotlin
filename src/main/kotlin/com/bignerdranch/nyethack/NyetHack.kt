@@ -24,6 +24,7 @@ private fun promptHeroName(): String {
 
 object Game {
    private var currentRoom: Room = TownSquare()
+    private var currentPosition = Coordinate(0,0)
     init {
         narrate("Welcome, adventurer")
         val mortality = if (player.isImmortal) "an immortal" else "a mortal"
