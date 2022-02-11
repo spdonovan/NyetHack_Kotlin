@@ -1,5 +1,6 @@
 package com.bignerdranch.nyethack
 lateinit var player: Player
+var endGame = true
 
 fun main() {
     narrate("Welcome to NyetHack!")
@@ -37,7 +38,7 @@ object Game {
     }
 
     fun play() {
-        while (true) {
+        while (endGame) {
             narrate("${player.name} of ${player.homeTown} ${player.title}, is in ${currentRoom.description()}")
             currentRoom.enterRoom()
 
@@ -65,6 +66,10 @@ object Game {
         val argument = input.split(" ").getOrElse(1) { "" }
 
         fun processCommand() = when (command.lowercase()) {
+            "fireball" -> { player.castFireBall() }
+            "prophesize" -> { player.prophesize() }
+            "quit" -> { endGame = false
+                narrate("Farewell and good luck adventurer") }
             "move" -> {
                 val direction = Direction.values()
                     .firstOrNull { it.name.equals(argument, ignoreCase = true) }
