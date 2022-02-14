@@ -10,6 +10,12 @@ class LootBox<T : Loot>(var contents: T) {
     }
 }
 
+class DropOffBox<T> where T : Loot, T : Sellable {
+    fun sellLoot(sellableLoot: T): Int {
+        return (sellableLoot.value * 0.7).toInt()
+    }
+}
+
 abstract class Loot {
     abstract val name: String
 }
