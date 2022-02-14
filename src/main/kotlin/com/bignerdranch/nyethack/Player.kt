@@ -53,6 +53,8 @@ class Player(initialName: String, val homeTown: String, override var healthPoint
             "best the world-eater"
         ).random()
     }
+val inventory = mutableListOf<Loot>()
+    var gold = 0
 
     fun castFireBall(numFireBalls: Int = 2) {
         narrate("A glass of Fireball springs into existence (x$numFireBalls)")

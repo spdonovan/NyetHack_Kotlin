@@ -1,11 +1,12 @@
 package com.bignerdranch.nyethack
-
 import kotlin.random.Random
+
 val listOfMonsters: List<Monster> = listOf(Dragon(), Goblin(), WereWolf())
 
 open class Room(val name: String) {
 
     protected open val status = "Calm"
+    open val lootBox: LootBox<Loot> = LootBox.random()
 
     open fun description() = "$name (Currently: $status)"
 
