@@ -18,3 +18,22 @@ interface Fightable {
         opponent.takeDamage(damageRoll)
     }
 }
+
+abstract class Monster(
+    override val name: String,
+    val description: String,
+    override var healthPoints: Int
+) : Fightable {
+    override fun takeDamage(damage: Int) {
+        healthPoints -= damage
+    }
+}
+
+class Goblin(
+    name: String = "Goblin",
+    description: String = "A nasty looking Goblin",
+    healthPoints: Int = 30,
+) : Monster(name, description, healthPoints) {
+    override val diceCount = 2
+    override val diceSides = 8
+}
