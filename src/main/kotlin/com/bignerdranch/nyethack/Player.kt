@@ -1,12 +1,20 @@
 package com.bignerdranch.nyethack
 
-import kotlin.concurrent.thread
 
-class Player(initialName: String, val homeTown: String, var healthPoints: Int, val isImmortal: Boolean)
-{
-    var name = initialName
+class Player(initialName: String, val homeTown: String, override var healthPoints: Int, val isImmortal: Boolean)
+    :Fightable {
+
+    override var name = initialName
     get() = field.replaceFirstChar { it.uppercase() }
     private set(value) { field = value.trim() }
+    override val diceCount = 3
+    override val diceSides = 4
+
+    override fun takeDamage(damage: Int) {
+        if (!isImmortal) {
+            healthPoints -= damage
+        }
+    }
 
 
     val title: String
