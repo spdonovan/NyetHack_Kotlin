@@ -1,5 +1,8 @@
 package com.bignerdranch.nyethack
 
+import kotlin.random.Random
+val listOfMonsters: List<Monster> = listOf(Dragon(), Goblin(), WereWolf())
+
 open class Room(val name: String) {
 
     protected open val status = "Calm"
@@ -11,8 +14,9 @@ open class Room(val name: String) {
     }
 }
 
-open class MonsterRoom(name: String,
-var monster: Monster? = Goblin()
+open class MonsterRoom(
+    name: String,
+    var monster: Monster? = listOfMonsters.random()
 ) : Room(name) {
     override fun description() =
         super.description() + " (Creature: ${monster?.description ?: "None"})"
@@ -25,3 +29,4 @@ var monster: Monster? = Goblin()
         }
     }
 }
+
