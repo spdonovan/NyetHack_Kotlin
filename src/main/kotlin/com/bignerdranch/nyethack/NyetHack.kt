@@ -9,7 +9,7 @@ fun main() {
     narrate("Welcome to NyetHack!")
     val playerName = promptHeroName()
     player = Player(playerName)
-    //changeNarratorMood()
+    changeNarratorMood()
     Game.play()
 }
 
@@ -17,13 +17,11 @@ private fun promptHeroName(): String {
     narrate("A hero enters the town of Kronstadt. What is their name?")
     { message -> "\u001b[33;1m$message\u001b[0m" }
 
-    /*val input = readLine()
+    val input = readLine()
     require(input != null && input.isNotEmpty()) {
     "The hero must have a name."
     }
-    return input*/
-    println("Madrigal")
-    return "Madrigal"
+    return input
 }
 
 object Game {
@@ -51,16 +49,12 @@ object Game {
     }
 
     fun move(direction: Direction) {
-        val newPosition = direction.updateCoordinate(currentPosition)
-        val newRoom = worldMap.getOrNull(newPosition.y)?.getOrNull(newPosition.x)
+        val newPosition = currentPosition move direction
+        val newRoom = worldMap[newPosition].orEmptyRoom()
 
-        if (newRoom != null) {
             narrate("The hero moves ${direction.name}")
             currentPosition = newPosition
             currentRoom = newRoom
-        } else {
-            narrate("You cannot move ${direction.name}")
-        }
     }
 
     fun fight() {
